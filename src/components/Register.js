@@ -142,7 +142,12 @@ const Register = () => {
               </div>
 
               <div className="form-group">
-                <button className="btn btn-primary btn-block">Sign Up</button>
+                <button
+                  className="btn btn-primary btn-block"
+                  style={{ marginTop: 10 }}
+                >
+                  Sign Up
+                </button>
               </div>
             </div>
           )}
