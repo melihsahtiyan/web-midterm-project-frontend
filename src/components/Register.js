@@ -32,17 +32,17 @@ const vusername = (value) => {
   if (value.length < 3 || value.length > 20) {
     return (
       <div className="alert alert-danger" role="alert">
-        The username must be between 3 and 20 characters.
+        The name must be between 3 and 20 characters.
       </div>
     );
   }
 };
 
 const vpassword = (value) => {
-  if (value.length < 6 || value.length > 40) {
+  if (value.length < 4 || value.length > 40) {
     return (
       <div className="alert alert-danger" role="alert">
-        The password must be between 6 and 40 characters.
+        The password must be between 4 and 40 characters.
       </div>
     );
   }
@@ -52,7 +52,8 @@ const Register = () => {
   const form = useRef();
   const checkBtn = useRef();
 
-  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
@@ -60,9 +61,14 @@ const Register = () => {
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
 
-  const onChangeUsername = (e) => {
-    const username = e.target.value;
-    setUsername(username);
+  const onChangeFirstName = (e) => {
+    const firstName = e.target.value;
+    setFirstName(firstName);
+  };
+
+  const onChangeLastName = (e) => {
+    const lastName = e.target.value;
+    setLastName(lastName);
   };
 
   const onChangeEmail = (e) => {
@@ -83,7 +89,7 @@ const Register = () => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(register(username, email, password))
+      dispatch(register(firstName, lastName, email, password))
         .then(() => {
           setSuccessful(true);
         })
@@ -106,13 +112,24 @@ const Register = () => {
           {!successful && (
             <div>
               <div className="form-group">
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">First Name</label>
                 <Input
                   type="text"
                   className="form-control"
-                  name="username"
-                  value={username}
-                  onChange={onChangeUsername}
+                  name="firstName"
+                  value={firstName}
+                  onChange={onChangeFirstName}
+                  validations={[required, vusername]}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="username">Last Name</label>
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="lastName"
+                  value={lastName}
+                  onChange={onChangeLastName}
                   validations={[required, vusername]}
                 />
               </div>
@@ -132,7 +149,7 @@ const Register = () => {
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <Input
-                  type="password"
+                  type="text"
                   className="form-control"
                   name="password"
                   value={password}

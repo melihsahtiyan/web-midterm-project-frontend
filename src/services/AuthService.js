@@ -1,19 +1,21 @@
 import axios from "axios";
 
-const API_URL = ""; // Auth api endpoint
+const API_URL = "https://localhost:44394/api/auth/"; // Auth api endpoint
 
-const register = (username, email, password) => {
-  return axios.post(API_URL + "signup", {
-    username,
+const register = (firstName, lastName, email, password) => {
+  debugger;
+  return axios.post(API_URL + "register", {
+    firstName,
+    lastName,
     email,
     password,
   });
 };
 
-const login = (username, password) => {
+const login = (email, password) => {
   return axios
-    .post(API_URL + "signin", {
-      username,
+    .post(API_URL + "login", {
+      email,
       password,
     })
     .then((response) => {
