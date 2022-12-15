@@ -21,6 +21,7 @@ import BoardAdmin from "./components/BoardAdmin";
 
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
+import AttackScreen from "./components/AttackScreen";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -43,8 +44,11 @@ const App = () => {
 
   useEffect(() => {
     if (currentUser) {
-      setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
-      setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
+      console.log("====================================");
+      console.log(currentUser);
+      console.log("====================================");
+      setShowModeratorBoard(currentUser.claims.includes("ROLE_USER"));
+      setShowAdminBoard(currentUser.claims.includes("ROLE_ADMIN"));
     } else {
       setShowModeratorBoard(false);
       setShowAdminBoard(false);
@@ -126,6 +130,7 @@ const App = () => {
           <Route path="/user" element={<BoardUser />} />
           <Route path="/mod" element={<BoardModerator />} />
           <Route path="/admin" element={<BoardAdmin />} />
+          <Route path="/attackScreen" element={<AttackScreen />} />
         </Routes>
       </div>
     </div>

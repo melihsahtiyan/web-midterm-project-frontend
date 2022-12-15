@@ -19,11 +19,17 @@ const login = (email, password) => {
       password,
     })
     .then((response) => {
-      if (response.data.accessToken) {
+      console.log("====================================");
+      console.log(response.data);
+      console.log("====================================");
+      if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
 
       return response.data;
+    })
+    .catch((error) => {
+      console.error("axios: ", error.message);
     });
 };
 

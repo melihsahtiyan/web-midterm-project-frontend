@@ -49,6 +49,7 @@ export const register =
 export const login = (email, password) => (dispatch) => {
   return AuthService.login(email, password).then(
     (data) => {
+      debugger;
       dispatch({
         type: LOGIN_SUCCESS,
         payload: { user: data },

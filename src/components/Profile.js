@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import UserService from "../services/UserService";
 
 const Profile = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
+  const [user, setUser] = useState({});
+
+  useLayoutEffect(() => {
+    console.log("Email", localStorage.getItem("email"));
+    UserService.getUserBoard().then(
+      (response) => {
+        setUser(response.data.data);
+        console.log("Response data: ", response.data);
+      },
+      (error) => {
+        const _content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+        console.log("Error: ", error.message);
+        setUser(_content);
+      }
+    );
+    console.log("Content: ", user);
+  }, []);
 
   if (!currentUser) {
     return <Navigate to="/login" />;
@@ -17,16 +38,17 @@ const Profile = () => {
         </h3>
       </header>
       <p>
-        <strong>Token:</strong> {currentUser.accessToken.substring(0, 20)} ...{" "}
-        {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
-      </p>
-      <p>
         <strong>Id:</strong> {currentUser.id}
       </p>
       <p>
-        <strong>Email:</strong> {currentUser.email}
+        <strong>Email:</strong> {user.email}
       </p>
-      <strong>Authorities:</strong>
+      <p>
+        <strong>First Name:</strong> {user.firstName}
+      </p>
+      <p>
+        <strong>Last Name:</strong> {user.lastName}
+      </p>
       <ul>
         {currentUser.roles &&
           currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
