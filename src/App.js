@@ -22,6 +22,7 @@ import BoardAdmin from "./components/BoardAdmin";
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import AttackScreen from "./components/AttackScreen";
+import AttackList from "./components/AttackList";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -45,7 +46,7 @@ const App = () => {
   useEffect(() => {
     if (currentUser) {
       console.log("====================================");
-      console.log(currentUser);
+      console.log("Kurrent", currentUser);
       console.log("====================================");
       setShowModeratorBoard(currentUser.claims.includes("ROLE_USER"));
       setShowAdminBoard(currentUser.claims.includes("ROLE_ADMIN"));
@@ -84,7 +85,15 @@ const App = () => {
           {currentUser && (
             <li className="nav-item">
               <Link to={"/user"} className="nav-link">
-                User
+                Profile
+              </Link>
+            </li>
+          )}
+
+          {currentUser && (
+            <li className="nav-item">
+              <Link to={"/attackList"} className="nav-link">
+                Past Attack List
               </Link>
             </li>
           )}
@@ -131,6 +140,7 @@ const App = () => {
           <Route path="/mod" element={<BoardModerator />} />
           <Route path="/admin" element={<BoardAdmin />} />
           <Route path="/attackScreen" element={<AttackScreen />} />
+          <Route path="/attackList" element={<AttackList />} />
         </Routes>
       </div>
     </div>

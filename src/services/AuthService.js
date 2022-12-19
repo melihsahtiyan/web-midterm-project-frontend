@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://localhost:44394/api/auth/"; // Auth api endpoint
+const API_URL = "https://localhost:5001/api/auth/"; // Auth api endpoint
 
 const register = (firstName, lastName, email, password) => {
   debugger;
@@ -33,6 +33,23 @@ const login = (email, password) => {
     });
 };
 
+const update = (email, passwordToCheck, password) => {
+  return axios
+    .post(API_URL + "update", {
+      email,
+      passwordToCheck,
+      password,
+    })
+    .then((response) => {
+      console.log("====================================");
+      console.log(response.data);
+      console.log("====================================");
+    })
+    .catch((error) => {
+      console.error("axios: ", error.message);
+    });
+};
+
 const logout = () => {
   localStorage.removeItem("user");
 };
@@ -41,4 +58,5 @@ export default {
   register,
   login,
   logout,
+  update,
 };

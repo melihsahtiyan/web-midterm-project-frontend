@@ -1,13 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useLayoutEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import UserService from "../services/UserService";
 import AttackScreen from "./AttackScreen";
+import { Button } from "react-bootstrap";
 
 const Home = () => {
   const [contents, setContent] = useState([]);
 
-  useEffect(() => {
+  let navigate = useNavigate();
+
+  function onAttackClickHandler(id) {
+    console.log("====================================");
+    console.log("OnClickHandler: ", id);
+    console.log("====================================");
+    localStorage.setItem("userToAttackId", id);
+    navigate("/attackScreen");
+  }
+
+  useLayoutEffect(() => {
     UserService.getPublicContent().then(
       (response) => {
         setContent(response.data);
@@ -48,9 +59,12 @@ const Home = () => {
                     <td>{content.lastName}</td>
                     <td>{content.email}</td>
                     <td>
-                      <Link to={"/attackScreen"} className="btn btn-primary">
+                      <Button
+                        onClick={() => onAttackClickHandler(content.id)}
+                        className="btn btn-primary"
+                      >
                         Attack
-                      </Link>
+                      </Button>
                     </td>
                   </tr>
                 </tbody>

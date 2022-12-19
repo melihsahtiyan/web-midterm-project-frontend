@@ -1,7 +1,6 @@
 import axios from "axios";
-import authHeader from "./AuthService";
 
-const API_URL = "https://localhost:5001/api/users/";
+const API_URL = "https://localhost:5001/api/attackDetails/";
 
 const getPublicContent = () => {
   return axios.get(API_URL + "getall");
@@ -19,18 +18,8 @@ const getUserByIdBoard = (id) => {
   });
 };
 
-// const getModeratorBoard = () => {
-//   return axios.get(API_URL + "mod", { headers: authHeader() });
-// };
-
-// const getAdminBoard = () => {
-//   return axios.get(API_URL + "admin", { headers: authHeader() });
-// };
-
 export default {
   getPublicContent,
   getUserBoard,
   getUserByIdBoard,
-  // getModeratorBoard,
-  // getAdminBoard,
 };

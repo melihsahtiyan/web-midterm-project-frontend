@@ -38,9 +38,6 @@ const Profile = () => {
         </h3>
       </header>
       <p>
-        <strong>Id:</strong> {currentUser.id}
-      </p>
-      <p>
         <strong>Email:</strong> {user.email}
       </p>
       <p>

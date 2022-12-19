@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -49,6 +50,7 @@ const vpassword = (value) => {
 };
 
 const Register = () => {
+  let navigate = useNavigate();
   const form = useRef();
   const checkBtn = useRef();
 
@@ -92,6 +94,8 @@ const Register = () => {
       dispatch(register(firstName, lastName, email, password))
         .then(() => {
           setSuccessful(true);
+          localStorage.setItem("email", email);
+          navigate("/profile");
         })
         .catch(() => {
           setSuccessful(false);

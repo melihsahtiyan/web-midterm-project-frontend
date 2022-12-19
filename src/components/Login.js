@@ -55,7 +55,7 @@ const Login = (props) => {
         .then(() => {
           console.log("Login: ", email, " ", password);
           localStorage.setItem("email", email);
-          navigate("/profile");
+          navigate("/user");
           window.location.reload();
         })
         .catch(() => {
