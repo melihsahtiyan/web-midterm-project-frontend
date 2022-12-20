@@ -1,5 +1,4 @@
 import axios from "axios";
-import authHeader from "./AuthService";
 
 const API_URL = "https://localhost:5001/api/users/";
 

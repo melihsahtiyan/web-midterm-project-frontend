@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
-import Input from "react-validation/build/input";
 import AuthService from "../services/AuthService";
 
 import UserService from "../services/UserService";

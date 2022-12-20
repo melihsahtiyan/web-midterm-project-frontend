@@ -1,8 +1,7 @@
 import React, { useState, useLayoutEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import UserService from "../services/UserService";
-import AttackScreen from "./AttackScreen";
 import { Button } from "react-bootstrap";
 
 const Home = () => {
